@@ -10,7 +10,7 @@ const Assets: React.FC = () => {
 
         {people.map((person) => {
           return (
-            <Line>
+            <Line key={person.id}>
               {person.name} {person.assets.toLocaleString('ko-KR')}원
             </Line>
           );

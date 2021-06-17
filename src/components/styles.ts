@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css, FlattenInterpolation } from 'styled-components';
 
 export const Title = styled.div`
   font-weight: 800;
@@ -9,6 +9,10 @@ export const Title = styled.div`
 export const Div = styled.div`
   select {
     margin: 0 0.5rem;
+    padding: 0.5rem;
+  }
+  input {
+    padding: 0.5rem;
   }
 `;
 export const Line = styled.div`
@@ -25,5 +29,67 @@ export const ResetBtn = styled.button`
   bottom: 2rem;
   right: 2rem;
   border-radius: 0.5rem;
-  box-shadow: 1px 1px 3px gray;
+`;
+
+export const GroundDiv = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: burlywood;
+  position: relative;
+`;
+
+export const GoalLine = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 1.2rem;
+  background-color: #222;
+  color: lightgray;
+  font-size: 0.8rem;
+  letter-spacing: 1.5rem;
+`;
+
+export const ReadyZone = styled.div`
+  width: 20%;
+  height: 10rem;
+  background-color: ivory;
+  position: absolute;
+  bottom: 0;
+`;
+
+export const HorseLine = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+`;
+
+export const HorseGrid = styled.div`
+  width: 20%;
+  height: 100%;
+  border-left: 1px dashed #ececec;
+  /* display: flex;
+  justify-content: center;
+  align-items: flex-end; */
+  position: relative;
+`;
+
+type HorseProps = {
+  bg: string;
+  bt?: number;
+};
+
+export const Horse = styled.div<HorseProps>`
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  position: absolute;
+
+  ${({ bg, bt = 0 }): FlattenInterpolation<HorseProps> => css`
+    background-color: ${bg};
+    bottom: ${bt}rem;
+  `}
 `;

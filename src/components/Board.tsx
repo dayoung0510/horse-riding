@@ -10,6 +10,7 @@ const TopSection = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
 const BottomSection = styled.div`
@@ -19,6 +20,7 @@ const BottomSection = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
 const Board: React.FC = () => {

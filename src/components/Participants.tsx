@@ -10,11 +10,18 @@ const Participants: React.FC = () => {
 
         {people.map((person) => {
           return (
-            <Line>
+            <Line key={person.id}>
               {person.name}
               <select>
+                <option value="">말을 선택하세요</option>
                 {horses.map((horse) => {
-                  return <option value={horse.id}>{horse.name}</option>;
+                  return (
+                    <>
+                      <option key={horse.id} value={horse.id}>
+                        {horse.name}
+                      </option>
+                    </>
+                  );
                 })}
               </select>
               <input type="text" placeholder="금액을 입력하세요" required />

@@ -4,9 +4,11 @@ import Board from 'components/Board';
 import Ground from 'components/Ground';
 
 const Div = styled.div`
-  background-color: #d6eaf1;
+  background-color: darkslategray;
   width: 100vw;
   height: 100vh;
+  padding: 3rem;
+  box-sizing: border-box;
 `;
 const HalfDiv = styled.div`
   width: 50%;
