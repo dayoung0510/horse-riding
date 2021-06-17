@@ -19,7 +19,7 @@ export const Line = styled.div`
   margin: 2rem 0;
 `;
 
-export const ResetBtn = styled.button`
+export const Btn = styled.button`
   background: #fff;
   border: 0;
   outline: 0;
@@ -29,6 +29,7 @@ export const ResetBtn = styled.button`
   bottom: 2rem;
   right: 2rem;
   border-radius: 0.5rem;
+  border: 1px solid gray;
 `;
 
 export const GroundDiv = styled.div`
@@ -49,29 +50,21 @@ export const GoalLine = styled.div`
   letter-spacing: 1.5rem;
 `;
 
-export const ReadyZone = styled.div`
-  width: 20%;
-  height: 10rem;
-  background-color: ivory;
-  position: absolute;
-  bottom: 0;
-`;
-
 export const HorseLine = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
   align-items: flex-end;
+  justify-content: center;
 `;
 
 export const HorseGrid = styled.div`
   width: 20%;
   height: 100%;
   border-left: 1px dashed #ececec;
-  /* display: flex;
-  justify-content: center;
-  align-items: flex-end; */
   position: relative;
+  display: flex;
+  justify-content: center;
 `;
 
 type HorseProps = {
@@ -80,16 +73,25 @@ type HorseProps = {
 };
 
 export const Horse = styled.div<HorseProps>`
-  width: 100%;
+  width: 5rem;
   height: 5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   color: black;
   position: absolute;
+  border-radius: 50%;
 
   ${({ bg, bt = 0 }): FlattenInterpolation<HorseProps> => css`
     background-color: ${bg};
-    bottom: ${bt}rem;
+    bottom: ${bt}%;
   `}
+`;
+
+export const RedTxt = styled.span`
+  color: red;
+`;
+
+export const GreenTxt = styled.span`
+  color: green;
 `;

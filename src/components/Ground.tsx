@@ -3,7 +3,6 @@ import { horses } from 'App/datas';
 import {
   GroundDiv,
   GoalLine,
-  ReadyZone,
   HorseLine,
   HorseGrid,
   Horse,
@@ -19,7 +18,7 @@ const Ground: React.FC = () => {
           {horses.map((horse) => {
             return (
               <HorseGrid key={horse.id}>
-                <Horse bg={horse.color} bt={3}>
+                <Horse bg={horse.color} bt={0}>
                   {horse.name}
                 </Horse>
               </HorseGrid>

@@ -1,6 +1,6 @@
 import React from 'react';
-import { people, horses } from 'App/datas';
-import { Title, Div, Line } from 'components/styles';
+import { people, horses, speed } from 'App/datas';
+import { Title, Div, Line, Btn } from 'components/styles';
 
 const Participants: React.FC = () => {
   return (
@@ -28,6 +28,7 @@ const Participants: React.FC = () => {
             </Line>
           );
         })}
+        <Btn>시작</Btn>
       </Div>
     </>
   );
