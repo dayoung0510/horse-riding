@@ -5,7 +5,7 @@ import './index.css';
 function App() {
   return (
     <div className="App">
-      <Base></Base>
+      <Base />
     </div>
   );
 }

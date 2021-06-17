@@ -11,11 +11,11 @@ const Div = styled.div`
 const HalfDiv = styled.div`
   width: 50%;
   height: 100%;
-  padding: 1rem;
 `;
 const FlexDiv = styled.div`
   display: flex;
   justify-content: space-between;
+  height: 100%;
 `;
 
 const Base: React.FC = () => {
