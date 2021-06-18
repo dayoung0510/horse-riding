@@ -1,4 +1,4 @@
-import styled, { css, FlattenInterpolation } from 'styled-components';
+import styled from 'styled-components';
 
 export const Title = styled.div`
   font-weight: 800;
@@ -65,27 +65,6 @@ export const HorseGrid = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-`;
-
-type HorseProps = {
-  bg: string;
-  bt?: number;
-};
-
-export const Horse = styled.div<HorseProps>`
-  width: 5rem;
-  height: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: black;
-  position: absolute;
-  border-radius: 50%;
-
-  ${({ bg, bt = 0 }): FlattenInterpolation<HorseProps> => css`
-    background-color: ${bg};
-    bottom: ${bt}%;
-  `}
 `;
 
 export const RedTxt = styled.span`

@@ -8,7 +8,7 @@ const Assets: React.FC = () => {
   return (
     <>
       <Div>
-        <Title>재산현황</Title>
+        <Title>내 지갑</Title>
 
         {people.map((person) => {
           const difference = defaultMoney - person.assets;

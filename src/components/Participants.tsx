@@ -1,8 +1,26 @@
-import React from 'react';
-import { people, horses, speed } from 'App/datas';
+import React, { useContext } from 'react';
+import { people, horses } from 'App/datas';
 import { Title, Div, Line, Btn } from 'components/styles';
+import { GameContext } from 'App/context';
+
+type Type = {
+  horse: string;
+  person: string;
+};
 
 const Participants: React.FC = () => {
+  const { state, setState, speedShuffle } = useContext(GameContext);
+
+  const betting =
+    ({ horse, person }: Type) =>
+    () => {
+      setState((prevState) => ({
+        ...prevState,
+        bettingPerson: person,
+        bettingHorse: horse,
+      }));
+    };
+
   return (
     <>
       <Div>
@@ -12,12 +30,19 @@ const Participants: React.FC = () => {
           return (
             <Line key={person.id}>
               {person.name}
-              <select>
+              <select
+                onChange={(e) => {
+                  betting({
+                    person: person.name,
+                    horse: e.target.value,
+                  });
+                }}
+              >
                 <option value="">말을 선택하세요</option>
                 {horses.map((horse) => {
                   return (
                     <>
-                      <option key={horse.id} value={horse.id}>
+                      <option key={horse.id} value={horse.name}>
                         {horse.name}
                       </option>
                     </>
@@ -28,7 +53,8 @@ const Participants: React.FC = () => {
             </Line>
           );
         })}
-        <Btn>시작</Btn>
+        <Btn onClick={() => speedShuffle()}>시작</Btn>
+        {console.log('state? ', state)}
       </Div>
     </>
   );

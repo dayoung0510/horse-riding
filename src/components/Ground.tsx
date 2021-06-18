@@ -1,14 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { horses } from 'App/datas';
-import {
-  GroundDiv,
-  GoalLine,
-  HorseLine,
-  HorseGrid,
-  Horse,
-} from 'components/styles';
+import { GroundDiv, GoalLine, HorseLine, HorseGrid } from 'components/styles';
+import Horse from 'components/Horse';
+import { GameContext } from 'App/context';
 
 const Ground: React.FC = () => {
+  const { state } = useContext(GameContext);
   return (
     <>
       <GroundDiv>
@@ -16,11 +13,11 @@ const Ground: React.FC = () => {
 
         <HorseLine>
           {horses.map((horse) => {
+            const speedArrIdx = state.speedDistribution[horse.id];
+
             return (
               <HorseGrid key={horse.id}>
-                <Horse bg={horse.color} bt={0}>
-                  {horse.name}
-                </Horse>
+                <Horse bg={horse.color} name={horse.name} speed={speedArrIdx} />
               </HorseGrid>
             );
           })}
