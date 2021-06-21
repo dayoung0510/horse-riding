@@ -9,7 +9,7 @@ type Type = {
 };
 
 const Participants: React.FC = () => {
-  const { state, setState, speedShuffle } = useContext(GameContext);
+  const { state, setState, SpeedShuffle } = useContext(GameContext);
 
   const betting =
     ({ horse, person }: Type) =>
@@ -53,8 +53,7 @@ const Participants: React.FC = () => {
             </Line>
           );
         })}
-        <Btn onClick={() => speedShuffle()}>시작</Btn>
-        {console.log('state? ', state)}
+        <Btn onClick={() => SpeedShuffle()}>시작</Btn>
       </Div>
     </>
   );

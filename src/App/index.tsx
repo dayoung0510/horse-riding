@@ -1,14 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import Base from 'components/Base';
-import { horses } from 'App/datas';
+import { horses, speeds } from 'App/datas';
 import { GameContext, BettingType, defaultValues } from 'App/context';
 import './index.css';
 
 function App() {
   const [state, setState] = useState<BettingType>(defaultValues);
+  const [position, setPosition] = useState(0);
+
+  // useEffect로 position을 1초에 1씩 올려줌 > 말 달리기
+  useEffect(() => {
+    const Count = setInterval(() => {
+      if (position > 0 && position < speeds.length - 1) {
+        setPosition((prevState) => {
+          return prevState + 1;
+        });
+      }
+    }, 1000);
+    return () => {
+      clearInterval(Count);
+    };
+  }, [position]);
 
   // 말 스피드 섞기위한 셔플
-  const speedShuffle = () => {
+  const SpeedShuffle = () => {
     setState((prevState) => {
       const arr = horses.map((horse) => {
         return horse.id;
@@ -21,11 +36,14 @@ function App() {
       }
       return { ...prevState, speedDistribution: arr };
     });
+    setPosition(1);
   };
 
   return (
     <div className="App">
-      <GameContext.Provider value={{ state, setState, speedShuffle }}>
+      <GameContext.Provider
+        value={{ position, setPosition, state, setState, SpeedShuffle }}
+      >
         <Base />
       </GameContext.Provider>
     </div>

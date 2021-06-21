@@ -56,6 +56,7 @@ export const HorseLine = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  color: #fff;
 `;
 
 export const HorseGrid = styled.div`

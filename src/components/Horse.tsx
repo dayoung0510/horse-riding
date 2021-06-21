@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { speeds } from 'App/datas';
 import styled, { css, FlattenInterpolation } from 'styled-components';
 import { GameContext } from 'App/context';
@@ -25,21 +25,23 @@ const Shape = styled.div<Props>`
 `;
 
 const Horse: React.FC<Props> = ({ bg, name, speed = 0 }) => {
-  const [position, setPosition] = useState(0);
+  const { position } = useContext(GameContext);
+  // const [position, setPosition] = useState(0);
 
-  useEffect(() => {
-    const count = setInterval(() => {
-      if (position < speeds.length) {
-        setPosition((prevState) => {
-          return prevState + 1;
-        });
-      }
-    }, 1000);
-    return () => clearInterval(count);
-  }, [position, setPosition]);
+  // useEffect(() => {
+  //   const count = setInterval(() => {
+  //     if (position < speeds.length) {
+  //       setPosition((prevState) => {
+  //         return prevState + 1;
+  //       });
+  //     }
+  //   }, 1000);
+  //   return () => clearInterval(count);
+  // }, [position, setPosition]);
 
   return (
     <>
+      {console.log(position)}
       {speeds[speed]}
       <Shape
         style={{ bottom: `${speeds[speed][position]}%` }}

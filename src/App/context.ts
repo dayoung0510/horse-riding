@@ -10,7 +10,9 @@ export type BettingType = {
 export type GameContextProps = {
   state: BettingType;
   setState: React.Dispatch<React.SetStateAction<BettingType>>;
-  speedShuffle: () => void;
+  SpeedShuffle: () => void;
+  position: number;
+  setPosition: (position: number) => void;
 };
 
 export const defaultValues = {
@@ -23,5 +25,7 @@ export const defaultValues = {
 export const GameContext = createContext<GameContextProps>({
   state: defaultValues,
   setState: () => {},
-  speedShuffle: () => {},
+  SpeedShuffle: () => {},
+  position: 0,
+  setPosition: () => {},
 });
