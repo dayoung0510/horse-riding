@@ -11,7 +11,7 @@ function App() {
   // useEffect로 position을 1초에 1씩 올려줌 > 말 달리기
   useEffect(() => {
     const Count = setInterval(() => {
-      if (position > 0 && position < speeds.length - 1) {
+      if (state.isOngoing === true && position < speeds.length - 1) {
         setPosition((prevState) => {
           return prevState + 1;
         });
@@ -20,11 +20,12 @@ function App() {
     return () => {
       clearInterval(Count);
     };
-  }, [position]);
+  }, [state.isOngoing, position]);
 
-  // 말 스피드 섞기위한 셔플
+  // 말 스피드 셔플하고 출발
   const SpeedShuffle = () => {
     setState((prevState) => {
+      setPosition(0);
       const arr = horses.map((horse) => {
         return horse.id;
       });
@@ -34,15 +35,20 @@ function App() {
         currentIdx -= 1;
         [arr[currentIdx], arr[randomIdx]] = [arr[randomIdx], arr[currentIdx]];
       }
-      return { ...prevState, speedDistribution: arr };
+      return { ...prevState, isOngoing: true, speedDistribution: arr };
     });
-    setPosition(1);
   };
 
   return (
     <div className="App">
       <GameContext.Provider
-        value={{ position, setPosition, state, setState, SpeedShuffle }}
+        value={{
+          position,
+          setPosition,
+          state,
+          setState,
+          SpeedShuffle,
+        }}
       >
         <Base />
       </GameContext.Provider>

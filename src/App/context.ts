@@ -5,6 +5,7 @@ export type BettingType = {
   bettingHorse: string;
   bettingMoney: number;
   speedDistribution: number[];
+  isOngoing: boolean;
 };
 
 export type GameContextProps = {
@@ -20,6 +21,7 @@ export const defaultValues = {
   bettingHorse: '',
   bettingMoney: 0,
   speedDistribution: [],
+  isOngoing: false,
 };
 
 export const GameContext = createContext<GameContextProps>({
