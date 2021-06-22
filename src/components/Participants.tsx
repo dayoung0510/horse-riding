@@ -1,21 +1,30 @@
-import React, { useContext } from 'react';
+import React, { ChangeEvent, useContext } from 'react';
 import { people, horses } from 'App/datas';
 import { Title, Div, Line, Btn } from 'components/styles';
-import { GameContext } from 'App/context';
+import { GameContext, BettingInfoType } from 'App/context';
+
+type A = {
+  p: string;
+  h: string;
+  m: number;
+};
 
 const Participants: React.FC = () => {
   const { bet, setBet, SpeedShuffle } = useContext(GameContext);
 
-  const handleChange = (idx: number) => () => {
-    setBet((prevState) => [
-      {
-        ...prevState,
-        bettingMoney: 0,
-        bettingPerson: '김김김',
-        bettingHorse: '쪼랑말',
-      },
-    ]);
-    console.log('!');
+  const handleChange = (idx: number, { p, h, m }: A): void => {
+    setBet((prevState) => {
+      return [
+        ...prevState.slice(0, idx),
+        {
+          ...prevState,
+          bettingMoney: m,
+          bettingPerson: p,
+          bettingHorse: h,
+        },
+        ...prevState.slice(idx + 1, prevState.length),
+      ];
+    });
   };
 
   console.log('bet', bet);
@@ -29,7 +38,15 @@ const Participants: React.FC = () => {
           return (
             <Line key={idx}>
               {person.name}
-              <select onChange={handleChange(idx)}>
+              <select
+                onChange={(e) =>
+                  handleChange(idx, {
+                    p: person.name,
+                    h: e.target.value,
+                    m: 345345,
+                  })
+                }
+              >
                 <option value="">말을 선택하세요</option>
                 {horses.map((horse) => {
                   return (
@@ -42,10 +59,11 @@ const Participants: React.FC = () => {
               <input
                 placeholder="금액을 입력하세요"
                 onChange={(e) => {
-                  // setBet((prevState) => ({
-                  //   ...prevState,
-                  //   bettingMoney: Number(e.target.value),
-                  // }));
+                  // handleChange(idx, { m: Number(e.target.value) });
+                  setBet((prevState) => ({
+                    ...prevState,
+                    bettingMoney: Number(e.target.value),
+                  }));
                 }}
                 required
               />
