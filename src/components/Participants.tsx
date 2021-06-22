@@ -7,7 +7,6 @@ const Participants: React.FC = () => {
   const { bet, setBet, SpeedShuffle } = useContext(GameContext);
 
   const handleChange = (idx: number) => () => {
-    // const bettingMap = new Map(bet.map((a) => []));
     setBet((prevState) => [
       {
         ...prevState,
