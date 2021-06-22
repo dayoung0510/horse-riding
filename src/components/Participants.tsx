@@ -4,9 +4,15 @@ import { Title, Div, Line, Btn } from 'components/styles';
 import { GameContext } from 'App/context';
 
 const Participants: React.FC = () => {
-  const { state, setState, SpeedShuffle } = useContext(GameContext);
+  const { bet, setBet, SpeedShuffle } = useContext(GameContext);
 
-  console.log(state);
+  const handleChange = () => () => {
+    setBet((prevState) => {
+      console.log(prevState);
+      return prevState;
+    });
+  };
+
   return (
     <>
       <Div>
@@ -16,20 +22,12 @@ const Participants: React.FC = () => {
           return (
             <Line key={person.id}>
               {person.name}
-              <select
-                onChange={(e) => {
-                  setState((prevState) => ({
-                    ...prevState,
-                    bettingPerson: person.name,
-                    bettingHorse: e.target.value,
-                  }));
-                }}
-              >
+              <select onChange={handleChange}>
                 <option value="">말을 선택하세요</option>
                 {horses.map((horse) => {
                   return (
                     <>
-                      <option key={horse.id} value={horse.name}>
+                      <option key={horse.name} value={horse.name}>
                         {horse.name}
                       </option>
                     </>
@@ -39,7 +37,7 @@ const Participants: React.FC = () => {
               <input
                 placeholder="금액을 입력하세요"
                 onChange={(e) => {
-                  setState((prevState) => ({
+                  setBet((prevState) => ({
                     ...prevState,
                     bettingMoney: Number(e.target.value),
                   }));

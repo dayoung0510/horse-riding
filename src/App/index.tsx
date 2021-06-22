@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import Base from 'components/Base';
 import { horses, speeds } from 'App/datas';
-import { GameContext, BettingType, defaultValues } from 'App/context';
+import {
+  GameContext,
+  GameStateType,
+  defaultValues,
+  bettingValues,
+  BettingType,
+} from 'App/context';
 import './index.css';
 
 function App() {
-  const [state, setState] = useState<BettingType>(defaultValues);
+  const [state, setState] = useState<GameStateType>(defaultValues);
   const [position, setPosition] = useState(0);
+  const [bet, setBet] = useState<BettingType>([
+    bettingValues,
+    bettingValues,
+    bettingValues,
+  ]);
 
   // useEffect로 position을 1초에 1씩 올려줌 > 말 달리기
   useEffect(() => {
@@ -46,6 +57,8 @@ function App() {
     <div className="App">
       <GameContext.Provider
         value={{
+          bet,
+          setBet,
           position,
           setPosition,
           state,
