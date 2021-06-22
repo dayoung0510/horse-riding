@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Base from 'components/Base';
 import { horses, speeds } from 'App/datas';
 import {
   GameContext,
   GameStateType,
   defaultValues,
-  bettingValues,
   BettingType,
 } from 'App/context';
 import './index.css';
@@ -13,11 +12,7 @@ import './index.css';
 function App() {
   const [state, setState] = useState<GameStateType>(defaultValues);
   const [position, setPosition] = useState(0);
-  const [bet, setBet] = useState<BettingType>([
-    bettingValues,
-    bettingValues,
-    bettingValues,
-  ]);
+  const [bet, setBet] = useState<BettingType>([]);
 
   // useEffect로 position을 1초에 1씩 올려줌 > 말 달리기
   useEffect(() => {
@@ -47,8 +42,8 @@ function App() {
         [arr[currentIdx], arr[randomIdx]] = [arr[randomIdx], arr[currentIdx]];
       }
 
-      const firstPrize = horses[arr.indexOf(0)].name;
-      console.log('1등 : ', firstPrize);
+      // const firstPrize = horses[arr.indexOf(0)].name;
+      // console.log('1등 : ', firstPrize);
       return { ...prevState, isOngoing: true, speedDistribution: arr };
     });
   };

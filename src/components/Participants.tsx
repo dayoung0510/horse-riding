@@ -6,41 +6,47 @@ import { GameContext } from 'App/context';
 const Participants: React.FC = () => {
   const { bet, setBet, SpeedShuffle } = useContext(GameContext);
 
-  const handleChange = () => () => {
-    setBet((prevState) => {
-      console.log(prevState);
-      return prevState;
-    });
+  const handleChange = (idx: number) => () => {
+    // const bettingMap = new Map(bet.map((a) => []));
+    setBet((prevState) => [
+      {
+        ...prevState,
+        bettingMoney: 0,
+        bettingPerson: '김김김',
+        bettingHorse: '쪼랑말',
+      },
+    ]);
+    console.log('!');
   };
+
+  console.log('bet', bet);
 
   return (
     <>
       <Div>
         <Title>참가자</Title>
 
-        {people.map((person) => {
+        {people.map((person, idx) => {
           return (
-            <Line key={person.id}>
+            <Line key={idx}>
               {person.name}
-              <select onChange={handleChange}>
+              <select onChange={handleChange(idx)}>
                 <option value="">말을 선택하세요</option>
                 {horses.map((horse) => {
                   return (
-                    <>
-                      <option key={horse.name} value={horse.name}>
-                        {horse.name}
-                      </option>
-                    </>
+                    <option key={horse.name} value={horse.name}>
+                      {horse.name}
+                    </option>
                   );
                 })}
               </select>
               <input
                 placeholder="금액을 입력하세요"
                 onChange={(e) => {
-                  setBet((prevState) => ({
-                    ...prevState,
-                    bettingMoney: Number(e.target.value),
-                  }));
+                  // setBet((prevState) => ({
+                  //   ...prevState,
+                  //   bettingMoney: Number(e.target.value),
+                  // }));
                 }}
                 required
               />

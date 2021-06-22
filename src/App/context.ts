@@ -1,22 +1,12 @@
 import React, { createContext } from 'react';
 
-export type BettingType = [
-  {
-    bettingPerson: string;
-    bettingHorse: string;
-    bettingMoney: number;
-  },
-  {
-    bettingPerson: string;
-    bettingHorse: string;
-    bettingMoney: number;
-  },
-  {
-    bettingPerson: string;
-    bettingHorse: string;
-    bettingMoney: number;
-  },
-];
+export type BettingInfoType = {
+  bettingPerson: string;
+  bettingHorse: string;
+  bettingMoney: number;
+};
+
+export type BettingType = BettingInfoType[];
 
 export type GameStateType = {
   speedDistribution: number[];

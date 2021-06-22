@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { horses, speeds } from 'App/datas';
+import { horses } from 'App/datas';
 import { GroundDiv, GoalLine, HorseLine, HorseGrid } from 'components/styles';
 import Horse from 'components/Horse';
 import { GameContext } from 'App/context';
