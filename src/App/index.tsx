@@ -11,12 +11,12 @@ function App() {
   // useEffect로 position을 1초에 1씩 올려줌 > 말 달리기
   useEffect(() => {
     const Count = setInterval(() => {
-      if (state.isOngoing === true && position < speeds.length - 1) {
+      if (state.isOngoing === true && position < speeds[0].length - 1) {
         setPosition((prevState) => {
           return prevState + 1;
         });
       }
-    }, 1000);
+    }, 300);
     return () => {
       clearInterval(Count);
     };
@@ -35,6 +35,9 @@ function App() {
         currentIdx -= 1;
         [arr[currentIdx], arr[randomIdx]] = [arr[randomIdx], arr[currentIdx]];
       }
+
+      const firstPrize = horses[arr.indexOf(0)].name;
+      console.log('1등 : ', firstPrize);
       return { ...prevState, isOngoing: true, speedDistribution: arr };
     });
   };
