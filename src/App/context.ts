@@ -2,7 +2,7 @@ import React, { createContext } from 'react';
 
 export type BettingInfoType = {
   bettingPerson: string;
-  bettingHorse: string;
+  bettingHorse: number;
   bettingMoney: number;
 };
 
@@ -32,7 +32,7 @@ export const defaultValues = {
 
 export const bettingValues = {
   bettingPerson: '',
-  bettingHorse: '',
+  bettingHorse: 0,
   bettingMoney: 0,
 };
 

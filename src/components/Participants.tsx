@@ -39,7 +39,7 @@ const Participants: React.FC = () => {
                 <option value="">말을 선택하세요</option>
                 {horses.map((horse) => {
                   return (
-                    <option key={horse.name} value={horse.name}>
+                    <option key={horse.id} value={horse.id}>
                       {horse.name}
                     </option>
                   );
