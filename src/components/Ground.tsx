@@ -5,40 +5,37 @@ import Horse from 'components/Horse';
 import { GameContext } from 'App/context';
 
 const Ground: React.FC = () => {
-  const { bet, state, setState, position } = useContext(GameContext);
-
-  // console.log('그라운드에서의 speeddistribution', state.speedDistribution);
-  console.log('화면에서보이는일등', state.speedDistribution);
+  const { bet, state, participants, setParticipants, position } =
+    useContext(GameContext);
 
   if (position === 9) {
     const WinnerHorse = state.speedDistribution.indexOf(0);
 
     bet.map((b, idx) => {
-      if (b.bettingHorse === WinnerHorse) {
-        return console.log(
-          `${people[idx].name}의 자산을 ${b.bettingMoney}만큼 늘립니다.`,
-        );
-      }
-      return console.log(
-        `${people[idx].name}의 자산을 ${b.bettingMoney}만큼 줄입니다. ${b.bettingHorse}에 걸었습니다.`,
-      );
-    });
+      const BeforeAsset = participants[idx].assets;
 
-    console.log(WinnerHorse);
-    console.log(state.speedDistribution.indexOf(0));
+      console.log('1', people[idx].assets);
+      if (Number(b.bettingHorse) === WinnerHorse) {
+        return BeforeAsset + 8;
+      }
+      console.log('2', people[idx].assets);
+
+      return BeforeAsset - b.bettingMoney;
+    });
   }
+
+  console.log(participants);
 
   return (
     <>
       <GroundDiv>
-        {/* <GoalLine>GOAL</GoalLine> */}
+        <GoalLine>GOAL</GoalLine>
         <HorseLine>
           {horses.map((horse) => {
             const speedArrIdx = state.speedDistribution[horse.id];
 
             return (
               <HorseGrid key={horse.id}>
-                {speedArrIdx}
                 <Horse bg={horse.color} name={horse.name} speed={speedArrIdx} />
               </HorseGrid>
             );
