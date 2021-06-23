@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { people } from 'App/datas';
 import { Title, Div, Line, Btn, GreenTxt, RedTxt } from 'components/styles';
+import { GameContext } from 'App/context';
 
 const defaultMoney = 100000;
 
 const Assets: React.FC = () => {
+  const { bet } = useContext(GameContext);
+
   return (
     <>
       <Div>

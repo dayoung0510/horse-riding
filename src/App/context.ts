@@ -11,6 +11,7 @@ export type BettingType = BettingInfoType[];
 export type GameStateType = {
   speedDistribution: number[];
   isOngoing: boolean;
+  winnerHorse: string;
 };
 
 export type GameContextProps = {
@@ -18,7 +19,7 @@ export type GameContextProps = {
   setBet: React.Dispatch<React.SetStateAction<BettingType>>;
   state: GameStateType;
   setState: React.Dispatch<React.SetStateAction<GameStateType>>;
-  SpeedShuffle: () => void;
+  ClickStart: () => void;
   position: number;
   setPosition: (position: number) => void;
 };
@@ -26,6 +27,7 @@ export type GameContextProps = {
 export const defaultValues = {
   speedDistribution: [],
   isOngoing: false,
+  winnerHorse: '',
 };
 
 export const bettingValues = {
@@ -39,7 +41,7 @@ export const GameContext = createContext<GameContextProps>({
   setBet: () => {},
   state: defaultValues,
   setState: () => {},
-  SpeedShuffle: () => {},
+  ClickStart: () => {},
   position: 0,
   setPosition: () => {},
 });

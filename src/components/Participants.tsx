@@ -4,7 +4,7 @@ import { Title, Div, Line, Btn } from 'components/styles';
 import { GameContext } from 'App/context';
 
 const Participants: React.FC = () => {
-  const { bet, setBet, SpeedShuffle } = useContext(GameContext);
+  const { setBet, ClickStart } = useContext(GameContext);
 
   const handleChange = useCallback(
     (idx: number) =>
@@ -25,8 +25,6 @@ const Participants: React.FC = () => {
       },
     [setBet],
   );
-
-  console.log('bet', bet);
 
   return (
     <>
@@ -56,7 +54,7 @@ const Participants: React.FC = () => {
             </Line>
           );
         })}
-        <Btn onClick={() => SpeedShuffle()}>시작</Btn>
+        <Btn onClick={() => ClickStart()}>시작</Btn>
       </Div>
     </>
   );

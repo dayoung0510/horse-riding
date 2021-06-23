@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { speeds } from 'App/datas';
 import styled, { css, FlattenInterpolation } from 'styled-components';
-import { GameContext } from 'App/context';
+import { GameContext, defaultValues } from 'App/context';
 
 type Props = {
   bg: string;
@@ -25,7 +25,12 @@ const Shape = styled.div<Props>`
 `;
 
 const Horse: React.FC<Props> = ({ bg, name, speed = 0 }) => {
-  const { position } = useContext(GameContext);
+  const { position, setState } = useContext(GameContext);
+
+  // if (position === speeds[0].length - 1) {
+  //   console.log('초기화!');
+  //   setState(defaultValues);
+  // }
 
   return (
     <>
