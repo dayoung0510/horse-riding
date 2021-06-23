@@ -6,13 +6,18 @@ import {
   GameStateType,
   defaultValues,
   BettingType,
+  bettingValues,
 } from 'App/context';
 import './index.css';
 
 function App() {
   const [state, setState] = useState<GameStateType>(defaultValues);
   const [position, setPosition] = useState(0);
-  const [bet, setBet] = useState<BettingType>([]);
+  const [bet, setBet] = useState<BettingType>([
+    bettingValues,
+    bettingValues,
+    bettingValues,
+  ]);
 
   // useEffect로 position을 1초에 1씩 올려줌 > 말 달리기
   useEffect(() => {

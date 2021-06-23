@@ -35,23 +35,7 @@ export const bettingValues = {
 };
 
 export const GameContext = createContext<GameContextProps>({
-  bet: [
-    {
-      bettingPerson: '',
-      bettingHorse: '',
-      bettingMoney: 0,
-    },
-    {
-      bettingPerson: '',
-      bettingHorse: '',
-      bettingMoney: 0,
-    },
-    {
-      bettingPerson: '',
-      bettingHorse: '',
-      bettingMoney: 0,
-    },
-  ],
+  bet: [],
   setBet: () => {},
   state: defaultValues,
   setState: () => {},
