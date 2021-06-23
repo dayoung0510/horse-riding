@@ -7,18 +7,22 @@ const Participants: React.FC = () => {
   const { bet, setBet, SpeedShuffle } = useContext(GameContext);
 
   const handleChange = useCallback(
-    (idx: number) => (e: ChangeEvent<HTMLSelectElement>) => {
-      setBet((prev) => {
-        return [
-          ...prev.slice(0, idx),
-          {
-            ...prev[idx],
-            bettingHorse: e.target.value,
-          },
-          ...prev.slice(idx + 1),
-        ];
-      });
-    },
+    (idx: number) =>
+      (e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+
+        setBet((prev) => {
+          return [
+            ...prev.slice(0, idx),
+            {
+              ...prev[idx],
+              bettingPerson: people[idx].name,
+              [name]: value,
+            },
+            ...prev.slice(idx + 1),
+          ];
+        });
+      },
     [setBet],
   );
 
@@ -33,7 +37,7 @@ const Participants: React.FC = () => {
           return (
             <Line key={idx}>
               {person.name}
-              <select onChange={handleChange(idx)}>
+              <select onChange={handleChange(idx)} name="bettingHorse">
                 <option value="">말을 선택하세요</option>
                 {horses.map((horse) => {
                   return (
@@ -44,14 +48,9 @@ const Participants: React.FC = () => {
                 })}
               </select>
               <input
+                name="bettingMoney"
                 placeholder="금액을 입력하세요"
-                onChange={(e) => {
-                  // handleChange(idx, { m: Number(e.target.value) });
-                  setBet((prevState) => ({
-                    ...prevState,
-                    bettingMoney: Number(e.target.value),
-                  }));
-                }}
+                onChange={handleChange(idx)}
                 required
               />
             </Line>
