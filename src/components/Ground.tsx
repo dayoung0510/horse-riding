@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { horses, people } from 'App/datas';
+import { horses, people, speeds } from 'App/datas';
 import { GroundDiv, GoalLine, HorseLine, HorseGrid } from 'components/styles';
 import Horse from 'components/Horse';
 import { GameContext } from 'App/context';
@@ -8,17 +8,15 @@ const Ground: React.FC = () => {
   const { bet, state, participants, setParticipants, position } =
     useContext(GameContext);
 
-  if (position === 9) {
+  if (position === speeds[0].length - 1) {
     const WinnerHorse = state.speedDistribution.indexOf(0);
 
     bet.map((b, idx) => {
       const BeforeAsset = participants[idx].assets;
 
-      console.log('1', people[idx].assets);
       if (Number(b.bettingHorse) === WinnerHorse) {
-        return BeforeAsset + 8;
+        return BeforeAsset + b.bettingMoney;
       }
-      console.log('2', people[idx].assets);
 
       return BeforeAsset - b.bettingMoney;
     });
