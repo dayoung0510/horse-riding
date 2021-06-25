@@ -8,7 +8,6 @@ import {
   BettingType,
   bettingValues,
   ParticipantsType,
-  participantsValues,
 } from 'App/context';
 import './index.css';
 
@@ -23,8 +22,6 @@ function App() {
   ]);
   const [participants, setParticipants] = useState<ParticipantsType>(people);
 
-  console.log(participants);
-
   // useEffect로 position을 1초에 1씩 올려줌 > 말 달리기
   useEffect(() => {
     const Count = setInterval(() => {
@@ -37,7 +34,43 @@ function App() {
     return () => {
       clearInterval(Count);
     };
-  }, [state.isOngoing, position]);
+  }, [state.isOngoing, position, state.winnerHorse]);
+
+  // 경주 끝난 후 내지갑 계산해주는 부분인데... 더러움
+  useEffect(() => {
+    const A = setTimeout(() => {
+      const WinnerHorse = state.winnerHorse;
+
+      bet.map((b, idx) => {
+        const BeforeAsset = participants[idx].assets;
+
+        const WinnersAsset = BeforeAsset + Number(b.bettingMoney);
+        const LoosersAsset = BeforeAsset - Number(b.bettingMoney);
+
+        if (Number(b.bettingHorse) === WinnerHorse) {
+          return setParticipants((prev) => {
+            return [
+              ...prev.slice(0, idx),
+              { ...prev[idx], assets: WinnersAsset },
+              ...prev.slice(idx + 1),
+            ];
+          });
+        }
+
+        return setParticipants((prev) => {
+          return [
+            ...prev.slice(0, idx),
+            { ...prev[idx], assets: LoosersAsset },
+            ...prev.slice(idx + 1),
+          ];
+        });
+      });
+    }, 3100);
+
+    return () => {
+      clearTimeout(A);
+    };
+  }, [bet, participants, state.winnerHorse]);
 
   const ClickStart = () => {
     setState((prevState) => {
@@ -53,7 +86,6 @@ function App() {
         currentIdx -= 1;
         [arr[currentIdx], arr[randomIdx]] = [arr[randomIdx], arr[currentIdx]];
       }
-
       return { ...prevState, isOngoing: true, speedDistribution: arr };
     });
   };

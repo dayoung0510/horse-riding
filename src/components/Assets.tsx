@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { people } from 'App/datas';
 import { Title, Div, Line, Btn, GreenTxt, RedTxt } from 'components/styles';
 import { GameContext } from 'App/context';
@@ -6,19 +6,19 @@ import { GameContext } from 'App/context';
 const defaultMoney = 100000;
 
 const Assets: React.FC = () => {
-  const { bet } = useContext(GameContext);
+  const { participants } = useContext(GameContext);
 
   return (
     <>
       <Div>
         <Title>내 지갑</Title>
 
-        {people.map((person) => {
+        {participants.map((person) => {
           const difference = defaultMoney - person.assets;
           return (
             <Line key={person.id}>
               {person.name} {person.assets.toLocaleString('ko-KR')}원 (
-              {difference <= defaultMoney ? (
+              {difference > defaultMoney ? (
                 <GreenTxt>+{difference}원</GreenTxt>
               ) : (
                 <>

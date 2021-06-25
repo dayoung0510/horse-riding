@@ -17,7 +17,7 @@ export type BettingType = BettingInfoType[];
 export type GameStateType = {
   speedDistribution: number[];
   isOngoing: boolean;
-  winnerHorse: string;
+  winnerHorse: number;
 };
 
 export type GameContextProps = {
@@ -41,7 +41,7 @@ export const participantsValues = {
 export const defaultValues = {
   speedDistribution: [],
   isOngoing: false,
-  winnerHorse: '',
+  winnerHorse: -1,
 };
 
 export const bettingValues = {

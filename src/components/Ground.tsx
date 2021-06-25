@@ -1,28 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { horses, people, speeds } from 'App/datas';
 import { GroundDiv, GoalLine, HorseLine, HorseGrid } from 'components/styles';
 import Horse from 'components/Horse';
 import { GameContext } from 'App/context';
 
 const Ground: React.FC = () => {
-  const { bet, state, participants, setParticipants, position } =
-    useContext(GameContext);
+  const { position, state, setState } = useContext(GameContext);
 
-  if (position === speeds[0].length - 1) {
-    const WinnerHorse = state.speedDistribution.indexOf(0);
+  const AfterRiding = state.speedDistribution.indexOf(0);
 
-    bet.map((b, idx) => {
-      const BeforeAsset = participants[idx].assets;
-
-      if (Number(b.bettingHorse) === WinnerHorse) {
-        return BeforeAsset + b.bettingMoney;
-      }
-
-      return BeforeAsset - b.bettingMoney;
+  // state에 1등말 넣어줌
+  useEffect(() => {
+    setState((prev) => {
+      return { ...prev, winnerHorse: AfterRiding };
     });
-  }
-
-  console.log(participants);
+  }, [AfterRiding, setState, state.winnerHorse]);
 
   return (
     <>
