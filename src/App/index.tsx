@@ -42,16 +42,14 @@ function App() {
       const WinnerHorse = state.winnerHorse;
 
       bet.map((b, idx) => {
-        const BeforeAsset = participants[idx].assets;
-
-        const WinnersAsset = BeforeAsset + Number(b.bettingMoney);
-        const LoosersAsset = BeforeAsset - Number(b.bettingMoney);
-
         if (Number(b.bettingHorse) === WinnerHorse) {
           return setParticipants((prev) => {
             return [
               ...prev.slice(0, idx),
-              { ...prev[idx], assets: WinnersAsset },
+              {
+                ...prev[idx],
+                assets: prev[idx].assets + Number(b.bettingMoney),
+              },
               ...prev.slice(idx + 1),
             ];
           });
@@ -60,17 +58,16 @@ function App() {
         return setParticipants((prev) => {
           return [
             ...prev.slice(0, idx),
-            { ...prev[idx], assets: LoosersAsset },
+            { ...prev[idx], assets: prev[idx].assets - Number(b.bettingMoney) },
             ...prev.slice(idx + 1),
           ];
         });
       });
     }, 3100);
-
     return () => {
       clearTimeout(A);
     };
-  }, [bet, participants, state.winnerHorse]);
+  }, [bet, state.winnerHorse]);
 
   const ClickStart = () => {
     setState((prevState) => {

@@ -18,11 +18,11 @@ const Assets: React.FC = () => {
           return (
             <Line key={person.id}>
               {person.name} {person.assets.toLocaleString('ko-KR')}원 (
-              {difference > defaultMoney ? (
-                <GreenTxt>+{difference}원</GreenTxt>
+              {difference < 0 ? (
+                <GreenTxt>+{Math.abs(difference)}원</GreenTxt>
               ) : (
                 <>
-                  <RedTxt>-{difference}원</RedTxt>
+                  <RedTxt>-{Math.abs(difference)}원</RedTxt>
                 </>
               )}
               )
