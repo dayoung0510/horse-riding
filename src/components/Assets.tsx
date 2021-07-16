@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from 'react';
-import { people } from 'App/datas';
+import React, { useContext } from 'react';
 import { Title, Div, Line, Btn, GreenTxt, RedTxt } from 'components/styles';
 import { GameContext } from 'App/context';
 

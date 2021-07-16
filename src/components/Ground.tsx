@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react';
-import { horses, people, speeds } from 'App/datas';
+import { horses } from 'App/datas';
 import { GroundDiv, GoalLine, HorseLine, HorseGrid } from 'components/styles';
 import Horse from 'components/Horse';
 import { GameContext } from 'App/context';
 
 const Ground: React.FC = () => {
-  const { position, state, setState } = useContext(GameContext);
+  const { state, setState } = useContext(GameContext);
 
   const AfterRiding = state.speedDistribution.indexOf(0);
 
